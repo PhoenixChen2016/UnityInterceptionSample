@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Library;
+using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,14 @@ namespace UnityInterceptionSample
 	{
 		static void Main(string[] args)
 		{
+			var container = new UnityContainer();
+			container.AddNewExtension<InterceptionExtension>();
+
+			container.RegisterType<IUserService, UserService>();
+
+			var service = container.Resolve<IUserService>();
+
+			service.AddUser("tester", "aa@bb.cc");
 		}
 	}
 }
