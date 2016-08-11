@@ -21,7 +21,9 @@ namespace UnityInterceptionSample
             // MarshalByRefObject proxy
             container.RegisterType<Mail, Mail>();
 
-            var service = container.Resolve<IUserService>();
+            container.RegisterInstance<IUserService>("test", new UserService());
+
+            var service = container.Resolve<IUserService>("test");
             var mail = container.Resolve<Mail>();
 
             service.AddUser("tester", "aa@bb.cc");
